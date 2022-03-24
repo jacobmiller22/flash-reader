@@ -46,7 +46,11 @@ const IndexView = () => {
       </div>
       <div style={{ color: "red" }}>{error}</div>
       <p>Enter words into the text area below. When ready, hit start.</p>
-      <textarea value={text} onChange={handleChange} />
+      <textarea
+        value={text}
+        onChange={handleChange}
+        style={{ width: "100%" }}
+      />
       <p>
         A future version of this app will allow you to upload a PDF or picture
         to read the text. This can be done easily using Optical Character
