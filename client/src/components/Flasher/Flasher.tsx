@@ -16,14 +16,14 @@ const Flasher = ({ text, stopFn }: FlasherProps) => {
   const [timer, setTime] = useState(null);
 
   useEffect(() => {
-    if (words[index] && !paused) {
+    if (index < words.length - 1 && words[index] && !paused) {
       const timeoutID = setTimeout(() => {
         setIndex(index + 1);
       }, rate);
       //@ts-ignore
       setTime(timeoutID);
     }
-  }, [index, paused]);
+  }, [index, paused, rate]);
 
   useEffect(() => {
     if (timer) {
@@ -51,6 +51,7 @@ const Flasher = ({ text, stopFn }: FlasherProps) => {
           <input
             name="rate"
             type="number"
+            min="1"
             value={rate}
             onChange={(e: any) => setRate(e.target.value)}
           />

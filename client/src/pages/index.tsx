@@ -7,9 +7,6 @@ import { IndexView } from "../views";
 const IndexPage: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>Flash Reader</title>
-      </Head>
       <div style={{ height: "100%" }}>
         <IndexView />
       </div>

@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Flasher } from "../../components";
 
 const IndexView = () => {
+  const initError = "​";
+
   const [text, setText] = useState("");
   const [show, setShow] = useState(false);
+  const [error, setError] = useState(initError);
+
+  useEffect(() => {
+    if (error !== initError && text.length > 0) {
+      setError(initError);
+    }
+  }, [text]);
 
   const handleChange = (event: any) => {
     setText(event.target.value);
@@ -12,6 +21,14 @@ const IndexView = () => {
   if (show) {
     return <Flasher text={text} stopFn={() => setShow(false)} />;
   }
+
+  const handleStart = () => {
+    if (text.length > 0) {
+      setShow(true);
+    } else {
+      setError("You must enter text to flash.");
+    }
+  };
 
   return (
     <div
@@ -25,8 +42,9 @@ const IndexView = () => {
     >
       <h1>Flash Reader</h1>
       <div>
-        <button onClick={() => setShow(true)}>Start Flasher</button>
+        <button onClick={handleStart}>Start Flasher</button>
       </div>
+      <div style={{ color: "red" }}>{error}</div>
       <p>Enter words into the text area below. When ready, hit start.</p>
       <textarea value={text} onChange={handleChange} />
       <p>
